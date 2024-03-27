@@ -1,39 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import { Button } from "@/components/ui/button"
+import { useCallback, useState } from 'react'
 import { BsPersonFill } from "react-icons/bs";
-import { format } from "date-fns"
-import { Calendar as CalendarIcon } from "lucide-react"
-
-import { cn } from "@/lib/utils"
-import { Calendar } from "@/components/ui/calendar"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-
 import './App.css'
 import Pending from './Tasks/Pending';
+import Createtask from './Tasks/Createtask';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
-  const [date, setDate] = useState({
-    from: new Date(2022, 0, 20),
-    to: new Date(2022, 0, 20),
-  })
-
+  const {progress,pending,deployed,completed,deffered , taskbox} = useSelector((state)=>state.task)
+  const dispatch = useDispatch()
   return (
-    <div className=' xl:flex xl:justify-center'>
-      <div className=' h-[100vh] xl:w-[80rem] '>
-        <div className="firstsection h-[10vh] text-2xl font-semibold  flex items-center justify-between px-2">
+    <div className='xl:h-[100vh] xl:flex xl:justify-center xl:items-center'>
+      <div className='  xl:w-[80rem] '>
+        <div className="firstsection  text-2xl font-semibold  flex items-center justify-between px-2 py-3">
           <h1>Task Board</h1>
           <div className="profilebtn bg-white rounded-full px-2 py-2">
             <BsPersonFill />
           </div>
         </div>
-        <div className="secondsection h-[90vh] xl:h-[87vh] overflow-y-hidden px-2 pt-1">
-          <div className="taskscontainer border-2 border-gray-300 rounded h-full lg:py-3 px-2">
+        <div className="secondsection  overflow-y-hidden px-2 pt-1">
+          <div className="taskscontainer border-2 border-gray-300 rounded h-full lg:py-3 px-2 relative">
             <div className="filtercontainer flex flex-col lg:flex-row gap-1">
               <p className=' text-lg'>Filter By:</p>
               <ul className=' listoffilters flex overflow-x-auto gap-2'>
@@ -68,15 +53,22 @@ function App() {
                 </datalist>
               </div>
             </div>
-            <div className="alltasks  h-full  overflow-x-auto mt-4 gap-2 lg:gap-0 pb-4">
-             <Pending title="Pending" theme="gray"/>
-             <Pending title="In Progress" theme="#9c9c1d"/>
-             <Pending title="Completed" theme="#28b728"/>
-             <Pending title="Deployed" theme="blue"/>
-             <Pending title="Deffered" theme="orange"/>
+            <div className="alltasks  overflow-x-auto mt-4 gap-2 lg:gap-0">
+              <Pending title="Pending" theme="gray"data={pending}/>
+              <Pending title="In Progress" theme="#9c9c1d" data={progress}/>
+              <Pending title="Completed" theme="#28b728" data={completed}/>
+              <Pending title="Deployed" theme="blue" data={deployed}/>
+              <Pending title="Deffered" theme="orange"  data={deffered}/>
+            </div>
+            <div className=' flex justify-center py-4 lg:justify-normal lg:absolute lg:top-0 lg:right-2 '>
+              <button className='bg-blue-700 rounded text-white px-5 py-2' onClick={()=>dispatch({
+                type:"taskboxtoggle",
+                payload:true
+              })}>Add New Task</button>
             </div>
           </div>
         </div>
+        {taskbox && <Createtask/>}
       </div>
 
     </div>

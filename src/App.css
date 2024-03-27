@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body{
-  background: linear-gradient(45deg, gray, transparent);
+  /* background: linear-gradient(45deg, gray, transparent); */
 }
 
 .alltasks{
@@ -18,7 +18,13 @@ body{
 .moretext::-webkit-scrollbar{
   display: none;
 }
-@media screen and (width<=768px) {
+.tasks::-webkit-scrollbar{
+  display: none;
+}
+.listoffilters::-webkit-scrollbar{
+  display: none;
+}
+@media screen and (width<=1024px) {
   .alltasks{
     display: grid;
     grid-template-columns: repeat(5 , 50%);
