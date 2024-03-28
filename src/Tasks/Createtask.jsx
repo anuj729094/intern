@@ -36,7 +36,7 @@ const Createtask = () => {
         setErrors(errors)
     }
     return (
-        <div className=' bg-[#00000082] fixed overflow-auto py-4 w-full h-full top-0 left-0 flex justify-center sm:items-center px-3'>
+        <div className=' bg-[#00000082] fixed overflow-auto py-4 w-full h-full top-0 left-0 flex items-center justify-center sm:items-center px-3'>
             <div className="createtaskcontainer w-[22rem] ">
                 <div className="heading flex justify-between  bg-white items-center py-2 px-4 font-bold ">
                     <h1>CREATE A TASK</h1>
@@ -57,7 +57,7 @@ const Createtask = () => {
                     <div className=" description flex justify-between items-start py-2 ">
                         <label htmlFor="desc">Description :</label>
                         <div className=' flex flex-col w-[70%]'>
-                            <textarea name="desc" required id="desc" onChange={(e) => setTask({ ...task, description: e.target.value })} cols="30" rows="4" className='px-1 py-1 w-[70%] bg-gray-300  rounded outline-none'></textarea>
+                            <textarea name="desc" required id="desc" onChange={(e) => setTask({ ...task, description: e.target.value })} cols="30" rows="4" className='px-1 py-1 w-full bg-gray-300  rounded outline-none'></textarea>
                             {errors.description && <p className=' text-red-600 text-xs'>Description should be of minimum 5 characters</p>}
                         </div>
 
@@ -72,7 +72,7 @@ const Createtask = () => {
                     <div className="assignee flex justify-between items-center py-2">
                         <label htmlFor="assignee" className='  '>Assignee :</label>
                         <div className=' flex flex-col w-[70%]'>
-                            <input type="text" required id="assignee" onChange={(e) => setTask({ ...task, assignee: e.target.value })} name="assignee" className='px-1 py-1  w-[70%] bg-gray-300 rounded outline-none' />
+                            <input type="text" required id="assignee" onChange={(e) => setTask({ ...task, assignee: e.target.value })} name="assignee" className='px-1 py-1  w-full bg-gray-300 rounded outline-none' />
                             {errors.assignee && <p className=' text-red-600 text-xs'>Assignee should be of minimum 5 characters</p>}
                         </div>
                     </div>
@@ -81,7 +81,7 @@ const Createtask = () => {
                         <select name="status" required id="status" className=' bg-gray-300 outline-none px-1 py-1 ' onChange={(e) => setTask({ ...task, status: e.target.value })}>
                             <option value="Select Status" hidden>Select Status</option>
                             <option value="Pending">Pending</option>
-                            <option value="In Progress">In Progress</option>
+                            <option value="Progress">In Progress</option>
                             <option value="Completed">Completed</option>
                             <option value="Deployed">Deployed</option>
                             <option value="Deffered">Deffered</option>

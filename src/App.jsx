@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { BsPersonFill } from "react-icons/bs";
 import './App.css'
 import Pending from './Tasks/Pending';
@@ -6,8 +6,9 @@ import Createtask from './Tasks/Createtask';
 import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
-  const {progress,pending,deployed,completed,deffered , taskbox} = useSelector((state)=>state.task)
+  const {taskarray , taskbox} = useSelector((state)=>state.task)
   const dispatch = useDispatch()
+ 
   return (
     <div className='xl:h-[100vh] xl:flex xl:justify-center xl:items-center'>
       <div className='  xl:w-[80rem] '>
@@ -54,11 +55,11 @@ function App() {
               </div>
             </div>
             <div className="alltasks  overflow-x-auto mt-4 gap-2 lg:gap-0">
-              <Pending title="Pending" theme="gray"data={pending}/>
-              <Pending title="In Progress" theme="#9c9c1d" data={progress}/>
-              <Pending title="Completed" theme="#28b728" data={completed}/>
-              <Pending title="Deployed" theme="blue" data={deployed}/>
-              <Pending title="Deffered" theme="orange"  data={deffered}/>
+              <Pending title="Pending" theme="gray"data={taskarray}/>
+              <Pending title="Progress" theme="#9c9c1d" data={taskarray}/>
+              <Pending title="Completed" theme="#28b728" data={taskarray}/>
+              <Pending title="Deployed" theme="blue" data={taskarray}/>
+              <Pending title="Deffered" theme="orange"  data={taskarray}/>
             </div>
             <div className=' flex justify-center py-4 lg:justify-normal lg:absolute lg:top-0 lg:right-2 '>
               <button className='bg-blue-700 rounded text-white px-5 py-2' onClick={()=>dispatch({
