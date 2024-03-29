@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Edittask = ({ utask, close }) => {
     const [updatetask, setUpdatetask] = useState(utask)
-    console.log(updatetask);
     const { taskarray } = useSelector((state) => state.task)
     const dispatch = useDispatch()
     const handleedit = (e) => {
@@ -19,7 +18,6 @@ const Edittask = ({ utask, close }) => {
             })
             close(null)
         }
-        
     }
     return (
         <div className=' bg-[#00000082] z-20 fixed overflow-auto py-4 w-full h-full top-0 left-0 flex items-center justify-center sm:items-center px-3'>

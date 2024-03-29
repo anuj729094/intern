@@ -6,8 +6,9 @@ import { useDispatch } from 'react-redux';
 const Createtask = () => {
     const dispatch = useDispatch()
     const [task, setTask] = useState({
-        title: "", description: "", team: "", assignee: "", status: null, priority: null
+        title: "", description: "", team: "", assignee: "", startdate:"" , enddate:"", status: null, priority: null
     })
+    console.log(task);
     const [errors, setErrors] = useState({})
     const postdata = (e) => {
         let errors = {}
@@ -74,6 +75,18 @@ const Createtask = () => {
                         <div className=' flex flex-col w-[70%]'>
                             <input type="text" required id="assignee" onChange={(e) => setTask({ ...task, assignee: e.target.value })} name="assignee" className='px-1 py-1  w-full bg-gray-300 rounded outline-none' />
                             {errors.assignee && <p className=' text-red-600 text-xs'>Assignee should be of minimum 5 characters</p>}
+                        </div>
+                    </div>
+                    <div className="startdate flex justify-between items-center py-2">
+                        <label htmlFor="startdate" className='  '>Start Date :</label>
+                        <div className=' flex flex-col w-[70%]'>
+                            <input type="date" required id="startdate" onChange={(e) => setTask({ ...task, startdate: e.target.value })} name="startdate" className='px-1 py-1  w-full bg-gray-300 rounded outline-none' />
+                        </div>
+                    </div>
+                    <div className="enddate flex justify-between items-center py-2">
+                        <label htmlFor="enddate" className='  '>End Date :</label>
+                        <div className=' flex flex-col w-[70%]'>
+                            <input type="date" required id="enddate" onChange={(e) => setTask({ ...task, enddate: e.target.value })} name="enddate" className='px-1 py-1  w-full bg-gray-300 rounded outline-none' />
                         </div>
                     </div>
                     <div className="status flex justify-start gap-11 items-center py-2">
