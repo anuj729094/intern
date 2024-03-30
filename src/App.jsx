@@ -45,19 +45,21 @@ function App() {
                     <input type="date" value={filter.enddate} className='rounded py-[3px] px-2 outline-none' onChange={(e) => setFilter({ ...filter, enddate: e.target.value })} />
                   </div>
                 </li>
-                <li><button className=' bg-blue-600 rounded text-white px-4 py-1' onClick={() => setFilter({
-                  assignee: "", priority: "", startdate: "", enddate: ""
-                })}>Clear Filter</button></li>
+            
               </ul>
             </div>
-            <div className="sortcontainer flex flex-col lg:flex-row mt-2 lg:mt-4">
+            <div className="sortcontainer flex lg:items-center flex-col lg:flex-row mt-2 lg:mt-4">
               <label htmlFor="sort">Sort By:</label>
               <select name="" id="sort" className=' lg:ml-4' onChange={(e)=>setPriority(e.target.value)}>
                 <option value="select priority" hidden>Select Priority</option>
                 <option value="Low to high">Low to high Priority</option>
                 <option value="High to Low">High to Low Priority</option>
               </select>
+              <button className=' bg-blue-600 rounded text-white px-4 py-1 ml-0 lg:ml-3 w-28 mt-3 lg:mt-0' onClick={() => setFilter({
+                  assignee: "", priority: "", startdate: "", enddate: ""
+                })}>Clear Filter</button>
             </div>
+
             <div className="alltasks  overflow-x-auto mt-4 gap-2 lg:gap-0">
               <Pending title="Pending" theme="gray" data={taskarray} filter={filter} sort={priority}/>
               <Pending title="Progress" theme="#9c9c1d" data={taskarray} filter={filter} sort={priority}/>

@@ -12,16 +12,13 @@ import Edittask from './Edittask';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Pending = ({ title, theme, data, filter ,sort}) => {
+const Pending = ({ title, theme, data, filter, sort }) => {
   const { assignee, priority, startdate, enddate } = filter
   const dispatch = useDispatch()
   const [arr, setArr] = useState([])
   const [dtask, setDtask] = useState(null)
   const [utask, setUtask] = useState(null)
- 
-  // useEffect(() => {
-  //   setArr(data.filter((item) => item.status === title))
-  // }, [data])
+
   const handledelete = () => {
     dispatch({
       type: "updatedeletetask",
@@ -43,7 +40,6 @@ const Pending = ({ title, theme, data, filter ,sort}) => {
       setArr(data.filter((task) => task.priority === priority && task.assignee === assignee && task.status === title))
     }
     else if (priority) {
-      console.log(priority);
       setArr(data.filter((task) => task.priority === priority && task.status === title))
     }
     else if (assignee) {
@@ -55,36 +51,36 @@ const Pending = ({ title, theme, data, filter ,sort}) => {
     else {
       setArr(data.filter((item) => item.status === title))
     }
-  }, [assignee, priority, startdate, enddate ,data])
-  useEffect(()=>{
-     if(sort && arr.length!==0){
-      if(sort==="High to Low"){
-  console.log(sort);
-
-        setArr(arr.sort(function(a,b){
-           if(Number(a.priority[1])>Number(b.priority[1])){
-            return 1
-           }
-           else{
+  }, [assignee, priority, startdate, enddate, data])
+  useEffect(() => {
+    if (sort && arr.length !== 0) {
+      if (sort === "High to Low") {
+        setArr(arr.sort(function (a, b) {
+            if (Number(a.priority[1]) > Number(b.priority[1])) {
+              return 1
+            }
+            else {
+              return -1
+            }
+          }))
+     
+        
+      }
+      else {
+        setArr(arr.sort(function (a, b) {
+          if (Number(a.priority[1]) > Number(b.priority[1])) {
             return -1
-           }
+          }
+          else {
+            return 1
+          }
         }))
       }
-      else{
-        setArr(arr.sort(function(a,b){
-          if(Number(a.priority[1])>Number(b.priority[1])){
-           return -1
-          }
-          else{
-           return 1
-          }
-       }))
-      }
-     }
-  },[sort,data])
+    }
+  }, [sort])
   return (
     <div className='tasks h-[28rem] lg:h-[25rem]  bg-slate-100 relative  overflow-y-auto'>
-      <h2 style={{ backgroundColor: theme }} className='text-white text-center py-2 sticky top-0 rounded-t'>{title}</h2>
+      <h2 style={{ backgroundColor: theme }} className='text-white text-center py-2 sticky z-[1] top-0 rounded-t'>{title}</h2>
       <div className=' px-2'>
         {
           arr.map((tasks, index) => <div key={index} className="taskcontent bg-gray-300 my-2 px-1 py-1 ">
@@ -98,19 +94,19 @@ const Pending = ({ title, theme, data, filter ,sort}) => {
               <div className=" relative assigneeupdatesection flex items-center justify-between my-1 ">
                 <p>{tasks.assignee}</p>
                 <div className=' absolute right-[-1rem]'>
-                <HoverCard >
-                  <HoverCardTrigger asChild>
-                    <Button variant="link"> <FaInfo className='text-2xl bg-blue-600 rounded text-white py-1 px-1' /></Button>
-                  </HoverCardTrigger>
-                  <HoverCardContent className="w-20 flex flex-col gap-2 items-start">
-                  <button className=' active:bg-slate-200 w-full text-left' onClick={() => setUtask(tasks)}>Edit</button>
-                    <button className='active:bg-slate-200 w-full text-left' onClick={tasks.status === "Completed" ? () => toast("Completed task cannot be deleted", {
-                      type: "error"
-                    }) : () => setDtask(tasks.title)}>Delete</button>
-                  </HoverCardContent>
-                </HoverCard>
+                  <HoverCard >
+                    <HoverCardTrigger asChild>
+                      <Button variant="link"> <FaInfo className='text-2xl bg-blue-600 rounded text-white py-1 px-1' /></Button>
+                    </HoverCardTrigger>
+                    <HoverCardContent className="w-20 flex flex-col gap-2 items-start">
+                      <button className=' active:bg-slate-200 w-full text-left' onClick={() => setUtask(tasks)}>Edit</button>
+                      <button className='active:bg-slate-200 w-full text-left' onClick={tasks.status === "Completed" ? () => toast("Completed task cannot be deleted", {
+                        type: "error"
+                      }) : () => setDtask(tasks.title)}>Delete</button>
+                    </HoverCardContent>
+                  </HoverCard>
                 </div>
-              
+
               </div>
               <div className="statustask inline-block mt-3 bg-blue-700 px-5 py-1 rounded text-white">
                 {tasks.status}

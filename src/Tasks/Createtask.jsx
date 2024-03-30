@@ -8,7 +8,6 @@ const Createtask = () => {
     const [task, setTask] = useState({
         title: "", description: "", team: "", assignee: "", startdate:"" , enddate:"", status: null, priority: null
     })
-    console.log(task);
     const [errors, setErrors] = useState({})
     const postdata = (e) => {
         let errors = {}
@@ -33,11 +32,12 @@ const Createtask = () => {
         }
         if(Object.keys(errors).length===0){
             dispatch(handletask(task))
+            document.getElementById("task").reset()
         }
         setErrors(errors)
     }
     return (
-        <div className=' bg-[#00000082] fixed overflow-auto py-4 w-full h-full top-0 left-0 flex items-center justify-center sm:items-center px-3'>
+        <div className=' bg-[#00000082] fixed overflow-auto py-4 w-full h-full z-40 top-0 left-0 flex items-center justify-center sm:items-center px-3'>
             <div className="createtaskcontainer w-[22rem] ">
                 <div className="heading flex justify-between  bg-white items-center py-2 px-4 font-bold ">
                     <h1>CREATE A TASK</h1>
@@ -46,7 +46,7 @@ const Createtask = () => {
                         payload: false
                     })} />
                 </div>
-                <form className=' px-4 bg-pink-100' onSubmit={postdata}>
+                <form className=' px-4 bg-pink-100' onSubmit={postdata} id="task">
                     <div className="title flex justify-between items-center py-2">
                         <label htmlFor="title" className='  '>Title :</label>
                         <div className=' flex flex-col w-[70%]'>
