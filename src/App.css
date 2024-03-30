@@ -27,6 +27,7 @@ body{
 @media screen and (width<=1024px) {
   .alltasks{
     display: grid;
+    column-gap: 41rem;
     grid-template-columns: repeat(5 , 50%);
   }
 }

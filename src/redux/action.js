@@ -5,6 +5,6 @@ export const handletask = (data) =>async(dispatch)=>{
         payload:data
        })
     } catch (error) {
-        
+        console.log(error);
     }
 }

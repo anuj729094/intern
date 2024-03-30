@@ -24,6 +24,7 @@ function App() {
         </div>
         <div className="secondsection  overflow-y-hidden px-2 pt-1">
           <div className="taskscontainer border-2 border-gray-300 rounded h-full lg:py-3 px-2 relative">
+            {/* filter section */}
             <div className="filtercontainer flex flex-col lg:flex-row gap-1">
               <p className=' text-lg'>Filter By:</p>
               <ul className=' listoffilters flex overflow-x-auto gap-2'>
@@ -48,6 +49,7 @@ function App() {
             
               </ul>
             </div>
+            {/* sort container */}
             <div className="sortcontainer flex lg:items-center flex-col lg:flex-row mt-2 lg:mt-4">
               <label htmlFor="sort">Sort By:</label>
               <select name="" id="sort" className=' lg:ml-4' onChange={(e)=>setPriority(e.target.value)}>
@@ -59,8 +61,8 @@ function App() {
                   assignee: "", priority: "", startdate: "", enddate: ""
                 })}>Clear Filter</button>
             </div>
-
-            <div className="alltasks  overflow-x-auto mt-4 gap-2 lg:gap-0">
+           {/* tasks categoires */}
+            <div className="alltasks  overflow-x-auto mt-4 gap-2 lg:gap-2">
               <Pending title="Pending" theme="gray" data={taskarray} filter={filter} sort={priority}/>
               <Pending title="Progress" theme="#9c9c1d" data={taskarray} filter={filter} sort={priority}/>
               <Pending title="Completed" theme="#28b728" data={taskarray} filter={filter} sort={priority}/>
@@ -75,9 +77,9 @@ function App() {
             </div>
           </div>
         </div>
+        {/* create task container */}
         {taskbox && <Createtask />}
       </div>
-
     </div>
 
   )

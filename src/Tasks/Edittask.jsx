@@ -80,7 +80,6 @@ const Edittask = ({ utask, close }) => {
                         <button type='submit' className=' bg-blue-600 text-white rounded py-2 px-3 my-2' >Submit</button>
                         <button type='reset' className=' bg-blue-600 text-white rounded py-2 px-3 my-2 mx-2' onClick={() => setUpdatetask({ title: "", description: " ", assignee: "", team: "", status: "", priority: "" })}>Reset</button>
                     </div>
-
                 </form>
             </div>
         </div>
